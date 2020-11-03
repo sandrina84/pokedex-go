@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh docker build -t pokedex-go .
+                sh """docker build -t pokedex-go ."""
             }
         }
         stage('Test') {
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh docker run --rm -it -p 5555:5555 pokedex-go:latest
+                sh """docker run --rm -p 5555:5555 pokedex-go:latest"""
                 npm start
             }
         }
