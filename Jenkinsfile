@@ -3,7 +3,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout(
+                    [
+                        $class: 'GitSCM', 
+                        branches: [[name: '**']], 
+                        doGenerateSubmoduleConfigurations: false, 
+                        extensions: [], 
+                        submoduleCfg: [], 
+                        userRemoteConfigs: [
+                            [
+                                credentialsId: '58d76b86-958b-49af-828c-0b0630a3fb22', 
+                                url: 'https://github.com/sandrina84/pokedex-go.git'
+                            ]
+                        ]
+                    ]
+                )
             }
         }
         stage('Build') {
